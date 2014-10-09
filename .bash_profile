@@ -160,14 +160,22 @@ BGMGN="\[\033[45m\]"
 BGCYN="\[\033[46m\]"
 BGWHT="\[\033[47m\]"
 
+function command_exists() {
+	# or: hash gdate 2>/dev/null
+	type "$1" &> /dev/null ;
+}
 
 function rvm_symbol {
-  #rvm-prompt u
-  rvm-prompt v
+  if command_exists rvm-prompt ; then
+	  #rvm-prompt u
+	  rvm-prompt v
+  fi
 }
 
 function rvm_gemset {
-  rvm-prompt g
+  if command_exists rvm-prompt ; then
+	  rvm-prompt g
+  fi
 }
 
 function date_display {
