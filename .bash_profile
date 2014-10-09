@@ -31,8 +31,6 @@ alias git-svn-sync='git svn rebase && git fetch origin && git rebase origin/mast
 alias git-ignores='find *.gitignore -type f -exec printf "\n# %s\n" {} \; -exec cat {} \;'
 
 # Php app stuff
-alias csalog='lnav ~/Projects/csa-server/app/storage/logs/log-apache2handler-`date "+%Y-%m-%d"`.txt'
-alias rwslog='lnav ~/Projects/registry-server/app/storage/logs/log-apache2handler-`date "+%Y-%m-%d"`.txt'
 alias apachelog='lnav /var/log/apache2/access_log'
 
 # Heroku
