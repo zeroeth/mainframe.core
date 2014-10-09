@@ -3,7 +3,7 @@ Mainframe.Core
 
 ![mainframe](mainframe.jpg)
 
-Dotfiles for vim and git. Friendly to Backbone.js projects, Arduino and Ruby.
+Dotfiles for vim and git. Friendly to Backbone.js projects, Arduino, Processing and Ruby.
 
 #### Installation
 
