@@ -45,6 +45,7 @@ Bundle 'jelera/vim-javascript-syntax'
 Bundle 'aaronj1335/underscore-templates.vim'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'sophacles/vim-processing'
 
 
 " Generic next-line match
