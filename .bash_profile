@@ -45,11 +45,11 @@ alias hoff='heroku ps:scale app=0'
 search_file_names() {
 	if [ $# -gt 1 ]
 	then
-		location=$2
+		location="${@:2}"
 	else
 		location="."
 	fi
-	find $location -name "*$1*" -exec echo "{}" \;
+	find $location -not -name "*.sw*" -name "*$1*" -exec echo "{}" \;
 }
 
 
@@ -57,7 +57,7 @@ search_file_names() {
 search_file_content() {
 	if [ $# -gt 1 ]
 	then
-		location=$2
+		location="${@:2}"
 	else
 		location="."
 	fi
