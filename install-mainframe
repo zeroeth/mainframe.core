@@ -1,6 +1,8 @@
 #!/bin/bash
 
 ln -si $PWD/.vimrc $HOME/
+ln -si $PWD/.gitconfig $HOME/
+ln -si $PWD/.gitignore $HOME/
 ln -si $PWD/.bash_profile $HOME/
 ln -si $PWD/.vim $HOME/
 ln -si $PWD/bin $HOME/

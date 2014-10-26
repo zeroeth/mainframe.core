@@ -1,0 +1,8 @@
+[user]
+	name = Kevin Alford
+	email = zeroeth@pixelflow.org
+[core]
+	editor = /usr/bin/vim
+	excludesfile = ~/.gitignore
+[push]
+	default = simple
