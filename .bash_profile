@@ -1,8 +1,30 @@
+# Helper for conditional inclusion of features.
+function command_exists() {
+	# or: hash gdate 2>/dev/null
+	type "$1" &> /dev/null ;
+}
+
 export CLICOLOR=1
+
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+# cache pip-installed packages to avoid re-downloading
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+pip-global() {
+	   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+
+export WORKON_HOME=$HOME/.virtualenvs
+
 
 alias svndiff='svn diff --diff-cmd diffwrap.sh'
 alias less='less --raw'
-alias ack='ack-grep'
+
+if command_exists ack-grep
+then
+	alias ack='ack-grep'
+fi
 
 # -I is enough to ignore vim swap files because they are binary
 alias grep='grep --exclude-dir=.git -I --color=auto'
@@ -23,7 +45,10 @@ alias gnl="git log --name-status"
 alias gfl="git log --follow --patch --"
 alias gpl="git log --patch --stat --dirstat"
 
-alias git-logs="echo gsl gdl gnl gfl gpl"
+alias git-log-formats="echo gsl, gdl, gnl, gfl <file>, gpl"
+
+alias git-list-untracked="git ls-files --others --exclude-standard"
+alias git-list-modified="git ls-files --modified --exclude-standard"
 
 # Git SVN
 alias gdc='git stash && git svn dcommit && git stash pop'
@@ -73,7 +98,7 @@ replace_file_content() {
 
 	IFS=$'\n' read -d '' -r -a filenames
 	for file_name in "${filenames[@]}"; do
-		sed "s/$search_text/$replace_text/g" -i $file_name
+		sed -i -e "s/$search_text/$replace_text/g" $file_name
 	done
 }
 
@@ -86,7 +111,8 @@ rename_files() {
 	IFS=$'\n' read -d '' -r -a filenames
 	for file_name in "${filenames[@]}"; do
 		new_name=$(echo "$file_name" | sed -e "s/$search_text/$replace_text/g")
-		mv "$file_name" "$new_name"
+		# FIXME this does not stop, but it does show you it didn't overwrite
+		mv -i "$file_name" "$new_name"
 	done
 }
 
@@ -101,7 +127,8 @@ copy_and_rename_files() {
 	IFS=$'\n' read -d '' -r -a filenames
 	for file_name in "${filenames[@]}"; do
 		new_name=$(echo "$file_name" | sed -e "s/$search_text/$replace_text/g")
-		cp "$file_name" "$new_name"
+		# FIXME this does not stop, but it does show you it didn't overwrite
+		cp -i "$file_name" "$new_name"
 	done
 }
 
@@ -121,9 +148,17 @@ projects() {
 alias p=projects
 
 
+# Local executables
+export PATH=./node_modules/.bin:$HOME/npm/bin:$HOME/bin:/usr/local/bin:$PATH
+
+# Virtual Env
+[[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source "/usr/local/bin/virtualenvwrapper.sh"
+
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+# GIT
+[[ -s "$HOME/bin/git-completion.bash" ]] && source "$HOME/bin/git-completion.bash"
 
 # Colors for scripts
 CLR="\[\033[0m\]"    # unsets color to term's fg color
@@ -157,11 +192,6 @@ BGBLU="\[\033[44m\]"
 BGMGN="\[\033[45m\]"
 BGCYN="\[\033[46m\]"
 BGWHT="\[\033[47m\]"
-
-function command_exists() {
-	# or: hash gdate 2>/dev/null
-	type "$1" &> /dev/null ;
-}
 
 function rvm_symbol {
   if command_exists rvm-prompt ; then
@@ -244,9 +274,6 @@ function ssh_prompt () {
 		echo "|^| "
 	fi
 }
-
-# Local executables
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # TODO decision to use utf-8 chars vs latin vs upper ascii
 # TODO move from echos to setting multiple variables (or break up into smaller functions for git)

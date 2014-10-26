@@ -16,6 +16,8 @@ else
 	destination="master"
 fi
 
+# TODO use ls-remote to find untracked/diverged (no fetch) branches
+
 git for-each-ref --format="%(refname:short) %(upstream:short)" refs/ | \
 while read local remote
 do

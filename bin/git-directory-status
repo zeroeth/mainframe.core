@@ -21,6 +21,8 @@ for f in $FILES; do
     fi
 done
 
+# TODO use git-ls-files -o --exclude-standard to show untracked?
+# and possibly color dirty files as well?
 
 for file in $FILES; do
 
