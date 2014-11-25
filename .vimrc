@@ -80,6 +80,9 @@ set incsearch
 set hlsearch
 
 
+" Block selection with short lines
+set ve+=block
+
 
 " Buffer Shortcuts
 nnoremap gp :bp<CR>
@@ -178,3 +181,8 @@ autocmd GUIEnter * set visualbell t_vb=
 
 " Dont save sessions from vim-session automatically
 let g:session_autosave = 'no'
+
+" Run per machine config
+if filereadable(glob("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
