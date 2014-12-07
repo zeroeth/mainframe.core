@@ -5,9 +5,6 @@ set tabstop=4
 set shiftwidth=4
 set noexpandtab
 
-" Soft tab
-autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 expandtab
-
 
 " Vundle Section
 set nocompatible
@@ -58,7 +55,6 @@ filetype plugin indent on
 " Visual helpers
 let g:indent_guides_color_change_percent=2
 autocmd VimEnter * :IndentGuidesEnable
-
 
 
 " Whitespace Cleaning
@@ -118,12 +114,6 @@ map <leader>o :OpenSession!<CR>
 map <leader>s :SaveSession
 
 
-" Language helpers for gf (go file)
-" Backbone/requireJS
-set suffixesadd+=.js
-set path+=scripts
-
-
 " Tab Control
 map <A-1> 1gt
 map <A-2> 2gt
@@ -147,20 +137,12 @@ set guioptions-=
 
 
 " Theme
-"color chlordane
 color molokai
-"set gfn=Menlo\ Regular:h15
 set gfn=Monospace\ Regular\ 11
 
 
 " Syntax
 syntax on
-
-" Link c++ to ino in syntax folder
-autocmd BufRead,BufNewFile *.ino setlocal filetype=cpp
-
-" Underscore syntax plugin only looks for mtpl
-autocmd BufRead,BufNewFile *.tpl setlocal syntax=underscore_template
 
 
 " Highlight whitespace
@@ -181,6 +163,16 @@ autocmd GUIEnter * set visualbell t_vb=
 
 " Dont save sessions from vim-session automatically
 let g:session_autosave = 'no'
+
+" Run per language configs
+if filereadable(glob("~/.vimrc.languages"))
+    source ~/.vimrc.languages
+endif
+
+" Run per folder configs
+if filereadable(glob("~/.vimrc.folders"))
+    source ~/.vimrc.folders
+endif
 
 " Run per machine config
 if filereadable(glob("~/.vimrc.local"))

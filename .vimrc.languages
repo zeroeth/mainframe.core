@@ -1,0 +1,19 @@
+" === Arduino ===
+" Link ino to c++ syntax
+autocmd BufRead,BufNewFile *.ino setlocal filetype=cpp
+
+
+" === Underscore Templates ===
+" Underscore syntax plugin only looks for mtpl
+autocmd BufRead,BufNewFile *.tpl setlocal syntax=underscore_template
+
+
+" === Javascript/Backbone ===
+" Helpers for gf (go file)
+set suffixesadd+=.js
+set path+=scripts
+
+
+" === Ruby ===
+" Soft tabs
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 expandtab

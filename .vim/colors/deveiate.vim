@@ -9,7 +9,7 @@
 " Drop this into your ~/.vim/colors directory, then load it via
 "       :colorscheme deveiate
 "
-" $Id: deveiate.vim 63 2008-06-27 19:39:48Z mahlon $
+" $Id: deveiate.vim 66 2008-06-30 02:28:56Z mahlon $
 
 
 " ----------------------------------------

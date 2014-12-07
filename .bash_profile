@@ -87,26 +87,27 @@ search_file_content() {
 		location="."
 	fi
 
-	grep -lr --color=never $1 $location
+	grep -lr --color=never "$1" $location
 }
 
 
 # Replace content in files
 replace_file_content() {
-	search_text=$1
-	replace_text=$2
+	search_text="$1"
+	replace_text="$2"
 
 	IFS=$'\n' read -d '' -r -a filenames
 	for file_name in "${filenames[@]}"; do
-		sed -i -e "s/$search_text/$replace_text/g" $file_name
+		# FIXME needs conditional for OSX/Linux
+		sed -i "" -e "s/$search_text/$replace_text/g" $file_name
 	done
 }
 
 # Replace file name
 rename_files() {
 
-	search_text=$1
-	replace_text=$2
+	search_text="$1"
+	replace_text="$2"
 
 	IFS=$'\n' read -d '' -r -a filenames
 	for file_name in "${filenames[@]}"; do
@@ -121,8 +122,8 @@ copy_and_rename_files() {
 	# Clever example :|
 	# find . -name "*from*" -exec bash -c 'echo $0 ${0/${from}/${to}' {} \;
 
-	search_text=$1
-	replace_text=$2
+	search_text="$1"
+	replace_text="$2"
 
 	IFS=$'\n' read -d '' -r -a filenames
 	for file_name in "${filenames[@]}"; do
@@ -156,6 +157,9 @@ export PATH=./node_modules/.bin:$HOME/npm/bin:$HOME/bin:/usr/local/bin:$PATH
 
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # GIT
 [[ -s "$HOME/bin/git-completion.bash" ]] && source "$HOME/bin/git-completion.bash"
@@ -275,6 +279,12 @@ function ssh_prompt () {
 	fi
 }
 
+function ssh_host () {
+	if [[ -n "$SSH_CONNECTION" ]]; then
+		echo "\u@\h "
+	fi
+}
+
 # TODO decision to use utf-8 chars vs latin vs upper ascii
 # TODO move from echos to setting multiple variables (or break up into smaller functions for git)
 function proml {
@@ -287,7 +297,7 @@ function proml {
     status_color="$RED"
   fi
 
-  title="\[\033]0;\u@\h: \w\007\]"
+  title="\[\033]0;$(ssh_host)\W\007\]"
 
   # Prompt variations
   #  PS1="$CLR\u@\h:\W$YLW\$(svn_branch)$GRN\$(svn_rev)$MGN\$(git_prompt)$EBLU\$$CLR "
@@ -297,6 +307,7 @@ function proml {
   # Options
   #  $(rvm_symbol)        - ruby version info
   #  $(ssh_prompt)        - remote host indication
+  #  $(ssh_host)          - remote host auth info
   #  ${status_color}      - last app exit code value
   #  $(rvm_gemset)        - ruby gem versioning
   #  $(virtualenv_prompt) - python versioning

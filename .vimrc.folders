@@ -1,0 +1,5 @@
+" Project Themes (test alternative to local.vimrc)
+
+autocmd BufRead,BufNewFile */arisJS/* color elise
+autocmd BufRead,BufNewFile */aris-iOSClient/* color deveiate
+autocmd BufRead,BufNewFile */aris-server/* color vividchalk
