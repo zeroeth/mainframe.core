@@ -17,3 +17,8 @@ set path+=scripts
 " === Ruby ===
 " Soft tabs
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 expandtab
+
+
+" === ObjectiveC ===
+" Soft Tabs
+autocmd FileType objc setlocal shiftwidth=2 tabstop=2 expandtab
