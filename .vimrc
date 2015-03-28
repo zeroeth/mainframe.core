@@ -22,7 +22,10 @@ Bundle 'majutsushi/tagbar'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/syntastic'
 Bundle 'xsunsmile/showmarks.git'
-" Bundle 'vim-scripts/colorizer'
+Bundle 'vim-scripts/colorizer'
+Bundle 'kien/rainbow_parentheses.vim'
+" Bundle 'ntpeters/vim-better-whitespace'
+Bundle 'airblade/vim-gitgutter'
 
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-session'
@@ -80,12 +83,6 @@ set hlsearch
 set ve+=block
 
 
-" Buffer Shortcuts
-nnoremap gp :bp<CR>
-nnoremap gn :bn<CR>
-nnoremap gb :ls<CR>:b
-
-
 " Create file / directory under cursor
 map <leader>cf :tabe <cfile><cr>
 map <leader>wd :!mkdir %:p:h<cr>
@@ -104,14 +101,26 @@ map <leader>a :e#<CR>
 
 
 " Buffer Explorer
-nnoremap <C-W>b :BufExplorer<CR>
+nnoremap ge :BufExplorer<CR>
+
+" Ack under cursor
+" (or ctrl+r ctrl+w)
+" TODO remap to a different leader key? so one can do like ]f ]b ]d
+" file/buffer/directory (same with ctrlp)
+nnoremap <leader>[ :Ack! <cword><CR>
+nnoremap <leader>\ :AckWindow! <cword><CR>
+nnoremap <leader>] :AckFile! <cword><CR>
+nnoremap <leader>' :Ack! expand('%:t')<CR>
+
+" Close quickfix
+nnoremap <leader>q :cclose<CR>
 
 " Swap Warnings
 set shortmess+=A
 
 " Session open
-map <leader>o :OpenSession!<CR>
-map <leader>s :SaveSession
+nnoremap <leader>o :OpenSession!<CR>
+nnoremap <leader>s :SaveSession <C-R>=fnamemodify(getcwd(),":t")<CR>
 
 
 " Tab Control
@@ -170,6 +179,7 @@ if filereadable(glob("~/.vimrc.languages"))
 endif
 
 " Run per folder configs
+" (You can also place .local.vimrc files directly in a folder)
 if filereadable(glob("~/.vimrc.folders"))
     source ~/.vimrc.folders
 endif

@@ -34,6 +34,7 @@ alias pwdp='pwd;pwd -P'
 alias ll='ls -al | grep "\->"'
 
 # Git shorthand
+alias idspispopd='git stash && git pull && git stash pop'
 alias gc='git commit'
 alias gap='git add --patch'
 alias ga='git add'
@@ -150,7 +151,14 @@ alias p=projects
 
 
 # Local executables
-export PATH=./node_modules/.bin:$HOME/npm/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# NPM executables (For folder local, and a global prefix of "~/npm")
+export PATH=./node_modules/.bin:$HOME/npm/bin:$PATH
+
+# Android SDK
+export ANDROID_HOME=~/bin/android-sdk
+export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
 
 # Virtual Env
 [[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source "/usr/local/bin/virtualenvwrapper.sh"
