@@ -2,6 +2,7 @@ Mainframe.Core
 --------------
 
 ![mainframe](mainframe.jpg)
+*[Scott Gerstenberger/Wikimedia Commons/Public Domain](http://commons.wikimedia.org/wiki/File:IBM2314DiskDrivesAndIBM2540CardReaderPunch.jpg)*
 
 Dotfiles for vim and git. Friendly to Backbone.js projects, Arduino, Processing and Ruby.
 
