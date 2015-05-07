@@ -50,6 +50,7 @@ alias git-log-formats="echo gsl, gdl, gnl, gfl <file>, gpl"
 
 alias git-list-untracked="git ls-files --others --exclude-standard"
 alias git-list-modified="git ls-files --modified --exclude-standard"
+alias git-edit-modified="mvim -p `git diff --name-only HEAD`"
 
 # Git SVN
 alias gdc='git stash && git svn dcommit && git stash pop'
@@ -330,3 +331,6 @@ function proml {
 }
 
 PROMPT_COMMAND=proml
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

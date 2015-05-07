@@ -21,7 +21,7 @@ Bundle 'itchyny/lightline.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/syntastic'
-Bundle 'xsunsmile/showmarks.git'
+" Bundle 'xsunsmile/showmarks.git'
 Bundle 'vim-scripts/colorizer'
 Bundle 'kien/rainbow_parentheses.vim'
 " Bundle 'ntpeters/vim-better-whitespace'
@@ -136,6 +136,16 @@ map <A-9> 9gt
 map <c-t> :tabnew<CR>
 map <A-w> :tabclose<CR>
 
+map <D-1> 1gt
+map <D-2> 2gt
+map <D-3> 3gt
+map <D-4> 4gt
+map <D-5> 5gt
+map <D-6> 6gt
+map <D-7> 7gt
+map <D-8> 8gt
+map <D-9> 9gt
+
 
 " GUI Minify
 set guioptions-=T
@@ -147,7 +157,8 @@ set guioptions-=
 
 " Theme
 color molokai
-set gfn=Monospace\ Regular\ 11
+set gfn=Monospace\ Regular\ 15
+set gfn=Menlo\ Regular:h16
 
 
 " Syntax
